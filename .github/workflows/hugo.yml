@@ -67,12 +67,12 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     
     steps:
-      - name: Checkout Source
-        uses: actions/checkout@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          submodules: recursive
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         publish_dir: ./public
+
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -103,7 +103,7 @@ jobs:
         run: |
           hugo --minify --cleanDestinationDir
           # Ensure CNAME file exists
-          echo "portfolio.iemafzalhassan.in" > public/CNAME
+          echo "portfolio.meeenakshirawat.in" > public/CNAME
 
       - name: Deploy to GitHub Pages
         id: deploy
