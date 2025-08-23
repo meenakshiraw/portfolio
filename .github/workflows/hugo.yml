@@ -5,24 +5,23 @@ on:
     branches: ["main"]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest   # 👉 Runs on GitHub's Ubuntu, not your PC
+  deploy:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-          fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
+        uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: "0.148.2"
 
-      - name: Build
+      - name: Build Hugo site
         run: hugo --minify
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
