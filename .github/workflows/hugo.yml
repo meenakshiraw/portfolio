@@ -9,7 +9,8 @@ on:
 
 # Permissions needed for external repository deployment
 permissions:
-  contents: read
+  contents: write   # required for gh-pages push
+
   pages: write
   id-token: write
 
